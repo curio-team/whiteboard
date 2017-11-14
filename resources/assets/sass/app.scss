@@ -1,0 +1,49 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+body{
+  background: linear-gradient(to right, #71B280, #134E5E);
+}
+
+h1{
+  margin: 15px;
+}
+
+.board{
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: 1fr 1fr;
+
+  margin: 0 15px 0 15px;
+}
+
+.category{
+  background: rgba(255, 255, 255, .6);
+}
+
+.title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, .8);
+}
+
+.title h2{
+  margin: 0;
+}
+
+.category ul{
+  margin-top: 15px;
+}
+
+.category ul li a{
+  margin-right: 15px;
+}
