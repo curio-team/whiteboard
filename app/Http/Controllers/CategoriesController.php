@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use App\User;
+use Auth;
+use Gate;
 
 class CategoriesController extends Controller
 {
@@ -85,26 +88,21 @@ class CategoriesController extends Controller
         //
     }
 
-    public function signUp(Request $request)
+    public function signUp(User $user, Category $category)
     {
-        $user = \App\User::findOrFail('bkjfskumgjwlirykw');
-        $description = $request->get('description');
-
-        if(empty($description)){
-            $description = 'geen omschrijving';
+        if (Gate::allows('edit-own', $user))
+        {
+            $user->categories()->syncWithoutDetaching($category);
         }
-
-        $user->categories()->syncWithoutDetaching([$request->get('category_id') => ['description' => $description]]);
-
-        return redirect()->route('categories.index');
+        return redirect()->route('home');
     }
 
-    public function signOff(Request $request)
+    public function signOff(User $user, Category $category)
     {
-        $user = \App\User::findOrFail('bkjfskumgjwlirykw');
-
-        $user->categories()->detach($request->get('category_id'));
-
-        return redirect()->route('categories.index');
+        if (Gate::allows('edit-own', $user))
+        {
+            $user->categories()->detach($category);
+        }
+        return redirect()->route('home');
     }
 }

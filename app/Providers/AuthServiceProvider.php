@@ -25,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('edit-own', function ($currentuser, $edituser) {
+            if($currentuser->id == $edituser->id) return true;
+            if($currentuser->type == 'teacher') return true;
+            return false;
+        });
     }
 }
