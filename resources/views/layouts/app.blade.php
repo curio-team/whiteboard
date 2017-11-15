@@ -11,7 +11,17 @@
     <title>Whiteboard</title>
 </head>
 <body>
-    <h1>Whiteboard</h1>
+	<header>
+	    <h1>Whiteboard</h1>
+	    <div class="user">
+	    	{{ Auth::user()->name }} (
+	    		@if(Auth::user()->type == 'teacher')
+	    			<a href="/admin">admin</a>&nbsp;|&nbsp;
+	    		@endif
+	    		<a href="https://login.amo.rocks/logout">uitloggen</a>
+	    	)
+	    </div>
+	</header>
     @yield('content')
     @stack('scripts')
 </body>
