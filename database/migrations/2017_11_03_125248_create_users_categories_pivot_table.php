@@ -16,7 +16,7 @@ class CreateUsersCategoriesPivotTable extends Migration
         Schema::create('users_categories_pivot', function (Blueprint $table) {
             $table->string('user_id');
             $table->integer('category_id')->unsigned();
-            $table->string('description')->default('geen beschrijving');
+            $table->string('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

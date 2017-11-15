@@ -8355,15 +8355,40 @@ body {
   background: linear-gradient(to right, #71B280, #134E5E);
 }
 
-h1 {
-  margin: 15px;
+header {
+  margin: 0 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 16px;
+}
+
+header > * {
+  margin: 15px 0;
+}
+
+.user {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.user,
+.user a {
+  color: white;
 }
 
 .board {
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 1fr 1fr;
-  margin: 0 15px 0 15px;
+  margin: 0 15px;
 }
 
 .category {
