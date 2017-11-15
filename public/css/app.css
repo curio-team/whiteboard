@@ -8357,8 +8357,13 @@ body {
 
 .container {
   min-height: 100vh;
-  display: grid;
-  grid-template-rows: 0px 70px auto 100px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 header,
@@ -8368,7 +8373,7 @@ footer {
 }
 
 header {
-  margin: 0 15px;
+  margin-top: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -8394,6 +8399,11 @@ header > * {
 .user,
 .user a {
   color: white;
+}
+
+.main {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .board {
@@ -8433,7 +8443,8 @@ header > * {
 }
 
 footer {
-  margin-top: 30px;
+  margin-top: auto;
+  margin-bottom: 15px;
   color: white;
 }
 
@@ -8459,6 +8470,14 @@ footer p {
 
   .board {
     grid-template-columns: 1fr;
+  }
+
+  footer p {
+    display: inline;
+  }
+
+  footer p:after {
+    content: " ";
   }
 }
 
