@@ -12,6 +12,16 @@ body{
   background: linear-gradient(to right, #71B280, #134E5E);
 }
 
+.container{
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 0px 70px auto 100px 0px;
+}
+
+header, .main, footer{
+  margin: 0 15px;
+}
+
 header{
   margin: 0 15px;
   display: flex;
@@ -36,7 +46,6 @@ header > *{
   display: grid;
   grid-gap: 15px;
   grid-template-columns: 1fr 1fr;
-  margin: 0 15px;
 }
 
 .category{
@@ -61,6 +70,20 @@ header > *{
 
 .category ul li a{
   margin-right: 15px;
+}
+
+footer{
+  margin-top: 30px;
+  color: white;
+}
+
+footer a{
+  color: white;
+  text-decoration: underline;
+}
+
+footer p{
+  margin: 0;
 }
 
 @media screen and (max-width: 700px) {

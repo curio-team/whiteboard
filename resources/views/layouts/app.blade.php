@@ -11,18 +11,26 @@
     <title>Whiteboard</title>
 </head>
 <body>
-	<header>
-	    <h1>Whiteboard</h1>
-	    <div class="user">
-	    	{{ Auth::user()->name }} (
-	    		@if(Auth::user()->type == 'teacher')
-	    			<a href="/admin">admin</a>&nbsp;|&nbsp;
-	    		@endif
-	    		<a href="https://login.amo.rocks/logout">uitloggen</a>
-	    	)
-	    </div>
-	</header>
-    @yield('content')
+	<div class="container">
+		<header>
+		    <h1>Whiteboard</h1>
+		    <div class="user">
+		    	{{ Auth::user()->name }} (
+		    		@if(Auth::user()->type == 'teacher')
+		    			<a href="/admin">admin</a>&nbsp;|&nbsp;
+		    		@endif
+		    		<a href="https://login.amo.rocks/logout">uitloggen</a>
+		    	)
+		    </div>
+		</header>
+		<div class="main">
+			@yield('content')
+		</div>
+		<footer>
+			<p>This is an open-source project. Checkout our <a target="_blank" href="https://github.com/Radiuscollege/whiteboard/">GitHub</a> if you wish to contribute.</p><p>Please report any bugs or <a target="_blank" href="https://github.com/Radiuscollege/whiteboard/issues">issues</a> you find. Feel free to submit any ideas or improvements as well!</p>
+		</footer>
+	</div>
+
     @stack('scripts')
 </body>
 </html>
