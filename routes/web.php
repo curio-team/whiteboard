@@ -19,8 +19,11 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::group(['middleware' => 'admin'], function() {
 
-		Route::view('/admin', 'layouts.admin');
-		Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
+		Route::view('/admin', 'layouts.admin')->name('admin.home');
+		Route::group(['prefix' => 'admin'], function(){
+			Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
+			Route::get('categories/{category}/toggle', 'CategoriesController@toggle')->name('categories.toggle');
+		});
 
 	});
 

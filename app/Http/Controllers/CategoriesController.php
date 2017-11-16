@@ -18,7 +18,14 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
+    }
+
+    public function toggle(Category $category)
+    {
+        $category->published = $category->published ? false : true;
+        $category->save();
+        return back();
     }
 
     /**
@@ -28,7 +35,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.create');
     }
 
     /**
@@ -39,7 +46,17 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'string|required',
+            'published' => 'required|min:0|max:1',
+        ]);
+
+        $category = new Category();
+        $category->name = $request->name;
+        $category->published = $request->published;
+        $category->save();
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -48,9 +65,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('admin.categories.edit')->with('category', $category);
     }
 
     /**
@@ -60,9 +77,23 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'string|required',
+            'published' => 'required|min:0|max:1',
+        ]);
+
+        $category->name = $request->name;
+        $category->published = $request->published;
+        $category->save();
+
+        return redirect()->route('categories.index');
+    }
+
+    public function delete(Category $category)
+    {
+        return view('admin.categories.delete')->with('category', $category);
     }
 
     /**
@@ -71,8 +102,9 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

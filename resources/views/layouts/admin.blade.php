@@ -8,7 +8,7 @@
         <p><a href="/">&lt; back</a></p>
         <ul>
             <li>Announcements</li>
-            <li><a href="/categories">Categories</a></li>
+            <li><a href="{{ route('categories.index') }}">Categories</a></li>
         </ul>
     </div>
 @endsection

@@ -85,6 +85,21 @@ header > *{
   margin-right: 15px;
 }
 
+.my-row {
+    padding: 15px;
+    border-bottom: 1px solid;
+    display: flex;
+}
+
+.my-row > *:first-child{
+  width: 135px;
+  margin-right: 30px;
+}
+
+.my-row input, .my-row select{
+  width: 235px;
+}
+
 footer{
   margin-top: auto;
   margin-bottom: 15px;

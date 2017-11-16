@@ -12,7 +12,7 @@ class WhiteboardController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::where('published', true)->get();
         return view('layouts.whiteboard', compact('categories'));
     }
 
