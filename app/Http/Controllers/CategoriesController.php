@@ -104,6 +104,7 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
+        $category->users()->detach();
         $category->delete();
         return redirect()->route('categories.index');
     }
