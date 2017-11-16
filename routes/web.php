@@ -13,10 +13,16 @@
 
 Route::group(['middleware' => 'auth'], function() {
 
-	Route::get('/', 'CategoriesController@index')->name('home');
-	Route::post('sign_up', 'CategoriesController@signUp')->name('category.signup');
-	Route::get('signup/user/{user}/category/{category}', 'CategoriesController@signUp');
-	Route::get('signoff/user/{user}/category/{category}', 'CategoriesController@signOff');
+	Route::get('/', 'WhiteboardController@index')->name('home');
+	Route::get('signup/user/{user}/category/{category}', 'WhiteboardController@signUp');
+	Route::get('signoff/user/{user}/category/{category}', 'WhiteboardController@signOff');
+
+	Route::group(['middleware' => 'admin'], function() {
+
+		Route::view('/admin', 'layouts.admin');
+		Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
+
+	});
 
 });
 

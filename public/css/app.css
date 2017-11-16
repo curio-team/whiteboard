@@ -8412,7 +8412,8 @@ header > * {
   grid-template-columns: 1fr 1fr;
 }
 
-.category {
+.category,
+.my-card {
   background: rgba(255, 255, 255, 0.6);
 }
 
@@ -8434,15 +8435,22 @@ header > * {
   margin: 0;
 }
 
-.category p {
+.category p,
+.my-card p {
   margin: 15px;
 }
 
-.category ul {
+.category ul,
+.my-card ul {
   margin-top: 15px;
 }
 
-.category ul li a {
+.my-card ul {
+  padding-bottom: 15px;
+}
+
+.category ul li a,
+.my-card ul li a {
   margin-right: 15px;
 }
 

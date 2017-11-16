@@ -18,7 +18,6 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-
         return view('categories.index', compact('categories'));
     }
 
@@ -39,17 +38,6 @@ class CategoriesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
     {
         //
     }
@@ -86,23 +74,5 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function signUp(User $user, Category $category)
-    {
-        if (Gate::allows('edit-own', $user))
-        {
-            $user->categories()->syncWithoutDetaching($category);
-        }
-        return redirect()->route('home');
-    }
-
-    public function signOff(User $user, Category $category)
-    {
-        if (Gate::allows('edit-own', $user))
-        {
-            $user->categories()->detach($category);
-        }
-        return redirect()->route('home');
     }
 }
