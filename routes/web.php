@@ -52,7 +52,6 @@ elseif(env('APP_ENV') == 'local')
 			$user->name = $id;
 			$user->type = 'student';
 			$user->email = $id . '@rocwb.nl';
-			$user->password = Hash::make($id);
 			$user->save();
 		}
 
