@@ -13,15 +13,17 @@
 <body>
 	<div class="container">
 		<header>
-		    <h1>Whiteboard</h1>
-		    <div class="user">
-		    	{{ Auth::user()->name }} (
-		    		@if(Auth::user()->type == 'teacher')
-		    			<a href="/admin">admin</a>&nbsp;|&nbsp;
-		    		@endif
-		    		<a href="https://login.amo.rocks/logout">uitloggen</a>
-		    	)
-		    </div>
+		    <h1>Whiteboards</h1>
+		    @if(Auth::check())
+			    <div class="user">
+			    	{{ Auth::user()->name }} (
+			    		@if(Auth::user()->type == 'teacher')
+			    			<a href="/admin">admin</a>&nbsp;|&nbsp;
+			    		@endif
+			    		<a href="https://login.amo.rocks/logout">uitloggen</a>
+			    	)
+			    </div>
+		    @endif
 		</header>
 		<div class="main">
 			@yield('content')
