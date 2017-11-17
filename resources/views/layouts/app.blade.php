@@ -7,22 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    @if(Gate::allows('admin'))
-    	<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-  		<script>
-  			Pusher.logToConsole = true;
-		    var pusher = new Pusher('f80c5128c14ec84e1da9', {
-		      	cluster: 'eu',
-		      	encrypted: true
-		    });
-
-		    var channel = pusher.subscribe('whiteboard');
-		    channel.bind('reload', function(data) {
-		    	location.reload();
-		    });
-	  	</script>
-    @endif
-
     <!-- (fav)icons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
@@ -69,5 +53,28 @@
 	</div>
 
     @stack('scripts')
+
+    @if(Gate::allows('admin'))
+    	<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  		<script>
+		    var pusher = new Pusher('f80c5128c14ec84e1da9', {
+		      	cluster: 'eu',
+		      	encrypted: true
+		    });
+
+		    var channel = pusher.subscribe('whiteboard');
+		    channel.bind('signup', function(data) {
+		    	var category = document.getElementById("category-" + data.category);
+		    	var li = document.createElement('li');
+		    	li.id = "category-" + data.category + "-user-" + data.user.id;
+		    	li.innerText = data.user.name;
+		    	category.appendChild(li);
+		    });
+		    channel.bind('signoff', function(data) {
+		    	var li = document.getElementById("category-" + data.category + "-user-" + data.user.id);
+		    	li.parentNode.removeChild(li);
+		    });
+	  	</script>
+    @endif
 </body>
 </html>

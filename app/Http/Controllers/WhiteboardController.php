@@ -45,7 +45,13 @@ class WhiteboardController extends Controller
 
             if($result['attached'])
             {
-                $this->pusher->trigger('whiteboard', 'reload', array());
+                $this->pusher->trigger('whiteboard', 'signup', array(
+                    'category' => $category->id,
+                    'user' => array(
+                        'id' => $user->id,
+                        'name' => $user->name
+                    )
+                ));
             }
         }
         return redirect()->route('home');
@@ -58,7 +64,12 @@ class WhiteboardController extends Controller
             $result = $user->categories()->detach($category);
             if($result)
             {
-                $this->pusher->trigger('whiteboard', 'reload', array());
+                $this->pusher->trigger('whiteboard', 'signoff', array(
+                    'category' => $category->id,
+                    'user' => array(
+                        'id' => $user->id,
+                    )
+                ));
             }
         }
         return redirect()->route('home');

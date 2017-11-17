@@ -41,9 +41,9 @@
             @if(!count($category->users))
                 <p>Dit whiteboard is leeg</p>
             @else
-                <ul>
+                <ul id="category-{{ $category->id }}">
                     @foreach($category->users as $user)
-                        <li>
+                        <li id="category-{{ $category->id }}-user-{{ $user->id }}">
                             {{$user->name}}
                             @if(!empty($user->pivot->description))
                                 ({{$user->pivot->description}})
