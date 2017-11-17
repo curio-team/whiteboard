@@ -84,10 +84,18 @@ header > *{
   margin-right: 15px;
 }
 
+.announcements{
+  grid-column: span 2;
+}
+
 .my-row {
     padding: 15px;
     border-bottom: 1px solid;
     display: flex;
+}
+
+.my-row:last-child{
+  border: none;
 }
 
 .my-row > *:first-child{
@@ -97,6 +105,10 @@ header > *{
 
 .my-row input, .my-row select{
   width: 235px;
+}
+
+h5{
+  font-weight: bold;
 }
 
 footer{

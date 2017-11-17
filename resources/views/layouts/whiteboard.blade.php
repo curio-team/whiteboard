@@ -2,6 +2,22 @@
 
 @section('content')
     <div class="board">
+        
+        @if(count($announcements))
+            <div class="category announcements">
+                <div class="title">
+                    <h2>Announcements</h2>
+                </div>
+                <ul>
+                    @foreach($announcements as $announcement)
+                        <li>
+                            <strong>{{ $announcement->title }}</strong><?php echo $announcement->body ? ': ' . $announcement->body : ''; ?>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @foreach($categories as $category)
         <div class="category">
             <div class="title">

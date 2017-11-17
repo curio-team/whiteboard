@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\User;
+use App\Announcement;
 use Auth;
 use Gate;
 
@@ -15,7 +16,12 @@ class WhiteboardController extends Controller
         $categories = Category::where('published', true)->with(['users' => function ($q) {
             $q->orderBy('users_categories_pivot.created_at', 'asc');
         }])->get();
-        return view('layouts.whiteboard', compact('categories'));
+
+        $announcements = Announcement::all();
+
+        return view('layouts.whiteboard')
+            ->with('categories', $categories)
+            ->with('announcements', $announcements);
     }
 
     public function signUp(User $user, Category $category)
