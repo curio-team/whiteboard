@@ -26,7 +26,7 @@ class WhiteboardController extends Controller
 
     public function signUp(User $user, Category $category)
     {
-        if (Gate::allows('edit-own', $user))
+        if (Gate::allows('edit-own', $user) && $category->published)
         {
             $user->categories()->syncWithoutDetaching($category);
         }
@@ -35,7 +35,7 @@ class WhiteboardController extends Controller
 
     public function signOff(User $user, Category $category)
     {
-        if (Gate::allows('edit-own', $user))
+        if (Gate::allows('edit-own', $user) && $category->published)
         {
             $user->categories()->detach($category);
         }
