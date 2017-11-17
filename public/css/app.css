@@ -8527,6 +8527,10 @@ footer p {
     grid-template-columns: 1fr;
   }
 
+  .announcements {
+    grid-column: span 1;
+  }
+
   footer p {
     display: inline;
   }
