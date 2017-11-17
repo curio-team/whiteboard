@@ -5,8 +5,23 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    @if(Gate::allows('admin'))
+    	<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+  		<script>
+  			Pusher.logToConsole = true;
+		    var pusher = new Pusher('f80c5128c14ec84e1da9', {
+		      	cluster: 'eu',
+		      	encrypted: true
+		    });
+
+		    var channel = pusher.subscribe('whiteboard');
+		    channel.bind('reload', function(data) {
+		    	location.reload();
+		    });
+	  	</script>
+    @endif
 
     <!-- (fav)icons -->
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">

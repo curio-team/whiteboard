@@ -11,6 +11,19 @@ use Gate;
 
 class WhiteboardController extends Controller
 {
+    
+    private $pusher;
+
+    public function __construct()
+    {
+        $this->pusher = new \Pusher\Pusher(
+            \Config::get('broadcasting.connections.pusher.key'),
+            \Config::get('broadcasting.connections.pusher.secret'),
+            \Config::get('broadcasting.connections.pusher.app_id'),
+            array('cluster' => 'eu', 'encrypted' => true)
+        );
+    }
+
     public function index()
     {
         $categories = Category::where('published', true)->with(['users' => function ($q) {
@@ -28,7 +41,12 @@ class WhiteboardController extends Controller
     {
         if (Gate::allows('edit-own', $user) && $category->published)
         {
-            $user->categories()->syncWithoutDetaching($category);
+            $result = $user->categories()->syncWithoutDetaching($category);
+
+            if($result['attached'])
+            {
+                $this->pusher->trigger('whiteboard', 'reload', array());
+            }
         }
         return redirect()->route('home');
     }
@@ -37,7 +55,11 @@ class WhiteboardController extends Controller
     {
         if (Gate::allows('edit-own', $user) && $category->published)
         {
-            $user->categories()->detach($category);
+            $result = $user->categories()->detach($category);
+            if($result)
+            {
+                $this->pusher->trigger('whiteboard', 'reload', array());
+            }
         }
         return redirect()->route('home');
     }
