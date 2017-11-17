@@ -30,5 +30,9 @@ class AuthServiceProvider extends ServiceProvider
             if($currentuser->type == 'teacher') return true;
             return false;
         });
+
+        Gate::define('admin', function ($currentuser) {
+            return ($currentuser->type == 'teacher') ? true : false;
+        });
     }
 }

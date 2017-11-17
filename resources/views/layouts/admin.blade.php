@@ -7,7 +7,7 @@
         </div>
         <p><a href="/">&lt; back</a></p>
         <ul>
-            <li>Announcements</li>
+            <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
             <li><a href="{{ route('categories.index') }}">Categories</a></li>
         </ul>
     </div>

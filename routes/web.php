@@ -21,8 +21,9 @@ Route::group(['middleware' => 'auth'], function() {
 
 		Route::view('/admin', 'layouts.admin')->name('admin.home');
 		Route::group(['prefix' => 'admin'], function(){
-			Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
-			Route::get('categories/{category}/toggle', 'CategoriesController@toggle')->name('categories.toggle');
+			Route::resource('announcements', 'AnnouncementController', ['except' => ['show']]);
+			Route::resource('categories', 'CategoryController', ['except' => ['show']]);
+			Route::get('categories/{category}/toggle', 'CategoryController@toggle')->name('categories.toggle');
 		});
 
 	});
