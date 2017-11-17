@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="board">
-        
         @if(count($announcements) || Gate::allows('admin'))
             <div class="category announcements">
                 <div class="title">
@@ -38,23 +37,19 @@
                     <a class="btn btn-primary" href="/signup/user/{{ Auth::user()->id }}/category/{{ $category->id }}">Voeg mij toe</a>
                 </div>
             </div>
-            @if(!count($category->users))
-                <p>Dit whiteboard is leeg</p>
-            @else
-                <ul id="category-{{ $category->id }}">
-                    @foreach($category->users as $user)
-                        <li id="category-{{ $category->id }}-user-{{ $user->id }}">
-                            {{$user->name}}
-                            @if(!empty($user->pivot->description))
-                                ({{$user->pivot->description}})
-                            @endif
-                            @if(Gate::allows('edit-own', $user))
-                                <a class="pull-right glyphicon glyphicon-remove" href="/signoff/user/{{ $user->id }}/category/{{ $category->id }}"></a>
-                            @endif
-                        </li>                        
-                    @endforeach
-                </ul>
-            @endif
+            <ul id="category-{{ $category->id }}">
+                @foreach($category->users as $user)
+                    <li id="category-{{ $category->id }}-user-{{ $user->id }}">
+                        {{$user->name}}
+                        @if(!empty($user->pivot->description))
+                            ({{$user->pivot->description}})
+                        @endif
+                        @if(Gate::allows('edit-own', $user))
+                            <a class="pull-right glyphicon glyphicon-remove" href="/signoff/user/{{ $user->id }}/category/{{ $category->id }}"></a>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
         </div>
         @endforeach
     </div>

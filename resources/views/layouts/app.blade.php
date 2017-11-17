@@ -67,7 +67,9 @@
 		    	var category = document.getElementById("category-" + data.category);
 		    	var li = document.createElement('li');
 		    	li.id = "category-" + data.category + "-user-" + data.user.id;
-		    	li.innerText = data.user.name;
+		    	li.innerHTML = data.user.name;
+		    	li.innerHTML += '<a class="pull-right glyphicon glyphicon-remove" href="/signoff/user/' + data.user.id + '/category/' + data.category + '"></a>';
+		    	console.log(li);
 		    	category.appendChild(li);
 		    });
 		    channel.bind('signoff', function(data) {
