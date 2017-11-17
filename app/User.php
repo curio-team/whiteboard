@@ -32,6 +32,6 @@ class User extends Authenticatable
 
     public function categories()
     {
-        return $this->belongsToMany(\App\Category::class, 'users_categories_pivot');
+        return $this->belongsToMany(\App\Category::class, 'users_categories_pivot')->withTimestamps();
     }
 }
