@@ -12,7 +12,9 @@ class WhiteboardController extends Controller
 {
     public function index()
     {
-        $categories = Category::where('published', true)->get();
+        $categories = Category::where('published', true)->with(['users' => function ($q) {
+            $q->orderBy('users_categories_pivot.created_at', 'asc');
+        }])->get();
         return view('layouts.whiteboard', compact('categories'));
     }
 
