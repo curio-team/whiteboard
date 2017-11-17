@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function() {
 			Route::resource('announcements', 'AnnouncementController', ['except' => ['show']]);
 			Route::resource('categories', 'CategoryController', ['except' => ['show']]);
 			Route::get('categories/{category}/toggle', 'CategoryController@toggle')->name('categories.toggle');
+			Route::get('categories/{category}/clear', 'CategoryController@clear')->name('categories.clear');
 		});
 
 	});

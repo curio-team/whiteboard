@@ -28,6 +28,12 @@ class CategoryController extends Controller
         return back(); 
     } 
  
+    public function clear(Category $category)
+    {
+        $category->users()->detach();
+        return back();
+    }
+
     /** 
      * Show the form for creating a new resource. 
      * 

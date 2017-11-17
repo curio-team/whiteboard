@@ -28,7 +28,15 @@
         <div class="category">
             <div class="title">
                 <h2>{{$category->name}}</h2>
-                <a class="btn btn-primary" href="/signup/user/{{ Auth::user()->id }}/category/{{ $category->id }}">Voeg mij toe</a>
+                <div>
+                    @if(Gate::allows('admin'))
+                        <div class="admin-buttons">
+                            <a class="btn btn-warning" href="{{ route('categories.clear', $category->id) }}">Leegmaken</a>
+                            <a class="btn btn-danger" href="{{ route('categories.toggle', $category->id) }}">Uitschakelen</a>
+                        </div>
+                    @endif
+                    <a class="btn btn-primary" href="/signup/user/{{ Auth::user()->id }}/category/{{ $category->id }}">Voeg mij toe</a>
+                </div>
             </div>
             @if(!count($category->users))
                 <p>Dit whiteboard is leeg</p>

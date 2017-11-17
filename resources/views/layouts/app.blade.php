@@ -33,7 +33,7 @@
 <body>
 	<div class="container">
 		<header>
-		    <h1>Whiteboards</h1>
+		    <h1><a href="">Whiteboards</a></h1>
 		    @if(Auth::check())
 			    <div class="user">
 			    	{{ Auth::user()->name }} (
