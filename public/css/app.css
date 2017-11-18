@@ -8538,5 +8538,14 @@ footer p {
   footer p:after {
     content: " ";
   }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  .category:hover .admin-buttons,
+  .announcements .btn {
+    display: none;
+  }
 }
 
