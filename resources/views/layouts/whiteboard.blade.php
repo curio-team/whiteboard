@@ -37,7 +37,7 @@
                     <a class="btn btn-primary" href="/signup/user/{{ Auth::user()->id }}/category/{{ $category->id }}">Voeg mij toe</a>
                 </div>
             </div>
-            <ul id="category-{{ $category->id }}">
+            <ol id="category-{{ $category->id }}">
                 @foreach($category->users as $user)
                     <li id="category-{{ $category->id }}-user-{{ $user->id }}">
                         {{$user->name}}
@@ -49,7 +49,7 @@
                         @endif
                     </li>
                 @endforeach
-            </ul>
+            </ol>
         </div>
         @endforeach
     </div>
