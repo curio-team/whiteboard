@@ -8447,15 +8447,28 @@ header > * {
   margin: 15px;
 }
 
-.category ol,
-.my-card ol {
+.category ul,
+.my-card ul {
   margin-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 0;
 }
 
-.category ol li a,
-.my-card ol li a {
+.category ul{
+  list-style: none;
+  padding-left: 15px;
+}
+
+.category ul li span{
+  font-style: italic;
+}
+
+.category ul li span:after{
+  content: ' – ';
+}
+
+.category ul li a,
+.my-card ul li a {
   margin-right: 15px;
 }
 

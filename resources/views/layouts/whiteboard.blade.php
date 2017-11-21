@@ -37,9 +37,12 @@
                     <a class="btn btn-primary" href="/signup/user/{{ Auth::user()->id }}/category/{{ $category->id }}">Voeg mij toe</a>
                 </div>
             </div>
-            <ol id="category-{{ $category->id }}">
+            <ul id="category-{{ $category->id }}">
                 @foreach($category->users as $user)
                     <li id="category-{{ $category->id }}-user-{{ $user->id }}">
+                        <span class="time">
+                            {{ $user->pivot->updated_at->toTimeString() }}
+                        </span>
                         {{$user->name}}
                         @if(!empty($user->pivot->description))
                             ({{$user->pivot->description}})
@@ -49,7 +52,7 @@
                         @endif
                     </li>
                 @endforeach
-            </ol>
+            </ul>
         </div>
         @endforeach
     </div>
