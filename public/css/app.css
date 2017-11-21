@@ -8447,15 +8447,15 @@ header > * {
   margin: 15px;
 }
 
-.category ul,
-.my-card ul {
+.category ol,
+.my-card ol {
   margin-top: 15px;
   padding-bottom: 15px;
   margin-bottom: 0;
 }
 
-.category ul li a,
-.my-card ul li a {
+.category ol li a,
+.my-card ol li a {
   margin-right: 15px;
 }
 
