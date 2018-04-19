@@ -8467,8 +8467,7 @@ header > * {
   content: ' – ';
 }
 
-.category ul li a,
-.my-card ul li a {
+a.glyphicon-remove {
   margin-right: 15px;
 }
 
