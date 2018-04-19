@@ -9,7 +9,8 @@ channel.bind('signup', function(data) {
 	var category = document.getElementById("category-" + data.category);
 	var li = document.createElement('li');
 	li.id = "category-" + data.category + "-user-" + data.user.id;
-	li.innerHTML = data.user.name;
+	li.innerHTML = '<span class="time">' + data.user.time + '</span>'; 
+	li.innerHTML += data.user.name;
 	li.innerHTML += '<a class="pull-right glyphicon glyphicon-remove" href="/signoff/user/' + data.user.id + '/category/' + data.category + '"></a>';
 	category.appendChild(li);
 });

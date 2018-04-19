@@ -49,7 +49,8 @@ class WhiteboardController extends Controller
                     'category' => $category->id,
                     'user' => array(
                         'id' => $user->id,
-                        'name' => $user->name
+                        'name' => $user->name,
+                        'time' => date('d/m H:i')
                     )
                 ));
             }
