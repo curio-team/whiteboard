@@ -66,5 +66,3 @@ elseif(env('APP_ENV') == 'local')
 		return redirect()->route('login');
 	});
 }
-
-route::post("/app/timer", "TimerController@update");

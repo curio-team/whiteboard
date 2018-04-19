@@ -25,7 +25,6 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
-	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- /end (fav)icons -->
 
     <title>Whiteboard</title>
@@ -58,12 +57,6 @@
     @if(Gate::allows('admin'))
     	<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
   		<script src="{{ asset('js/websockets.js') }}"></script>
-    @else
-		<script
-		src="https://code.jquery.com/jquery-3.2.1.min.js"
-		integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-		crossorigin="anonymous"></script>
-		<script src="js/Refresh-Timer.js"></script>
-	@endif
+    @endif
 </body>
 </html>
