@@ -30,7 +30,7 @@ class WhiteboardController extends Controller
             $q->orderBy('users_categories_pivot.created_at', 'asc');
         }])->get();
 
-        $announcements = Announcement::all();
+        $announcements = Announcement::orderBy('created_at', 'desc')->get();
 
         return view('layouts.whiteboard')
             ->with('categories', $categories)
