@@ -8467,6 +8467,10 @@ header > * {
   content: ' – ';
 }
 
+.announcements li{
+  margin-bottom: 10px;
+}
+
 a.glyphicon-remove {
   margin-right: 15px;
 }
