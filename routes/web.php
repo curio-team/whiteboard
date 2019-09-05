@@ -31,6 +31,20 @@ Route::group(['middleware' => 'auth'], function() {
 
 });
 
+Route::group(['prefix' => 'api', 'middleware' => 'apikey'], function() {
+
+	Route::get('/boards', function(){
+		return \App\Category::where('published', true)->get();
+	});
+
+	Route::get('/boards/{board}', function($board){
+		return \App\Category::where('id', $board)->with(['users' => function ($q) {
+            $q->orderBy('users_categories_pivot.created_at', 'asc');
+        }])->get();
+	});
+
+});
+
 if(env('APP_ENV') == 'production')
 {
 	Route::get('/amoclient/ready', function(){
