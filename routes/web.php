@@ -55,6 +55,10 @@ if(env('APP_ENV') == 'production')
 	Route::get('/login', function(){
 		return redirect('/amoclient/redirect');
 	})->name('login');
+	Route::get('logout', function(){
+		Auth::logout();
+		return redirect()->route('login');
+	});
 }
 elseif(env('APP_ENV') == 'local')
 {
