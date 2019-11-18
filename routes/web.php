@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function() {
 			Route::resource('categories', 'CategoryController', ['except' => ['show']]);
 			Route::get('categories/{category}/toggle', 'CategoryController@toggle')->name('categories.toggle');
 			Route::get('categories/{category}/clear', 'CategoryController@clear')->name('categories.clear');
+			Route::get('count', 'CountController@index')->name('count.index');
+			Route::post('count', 'CountController@filter')->name('count.filter');
 		});
 
 	});

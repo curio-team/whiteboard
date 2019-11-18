@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "63739614e78f772507df40796aa28485",
@@ -1601,16 +1601,16 @@
         },
         {
             "name": "studiokaa/amoclient",
-            "version": "v1.1.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/StudioKaa/amoclient.git",
-                "reference": "dfc867079f4717a41e0eff4ccee5858a80d1097e"
+                "reference": "4c1c14dede1e0b2ca96e8c97bbde91616ba06349"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StudioKaa/amoclient/zipball/dfc867079f4717a41e0eff4ccee5858a80d1097e",
-                "reference": "dfc867079f4717a41e0eff4ccee5858a80d1097e",
+                "url": "https://api.github.com/repos/StudioKaa/amoclient/zipball/4c1c14dede1e0b2ca96e8c97bbde91616ba06349",
+                "reference": "4c1c14dede1e0b2ca96e8c97bbde91616ba06349",
                 "shasum": ""
             },
             "require": {
@@ -1632,7 +1632,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "none"
+                "CC-BY-NC-SA-4.0"
             ],
             "authors": [
                 {
@@ -1641,7 +1641,7 @@
                 }
             ],
             "description": "Client for amologin",
-            "time": "2017-11-15T19:22:43+00:00"
+            "time": "2018-05-16T20:01:01+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

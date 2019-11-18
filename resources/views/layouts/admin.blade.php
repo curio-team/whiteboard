@@ -9,6 +9,7 @@
         <ul>
             <li><a href="{{ route('announcements.index') }}">Announcements</a></li>
             <li><a href="{{ route('categories.index') }}">Categories</a></li>
+            <li><a href="{{ route('count.index') }}">Aantallen vragen</a></li>
         </ul>
     </div>
 @endsection
