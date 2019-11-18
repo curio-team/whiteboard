@@ -53,6 +53,9 @@ class WhiteboardController extends Controller
                         'time' => date('d/m H:i')
                     )
                 ));
+                
+                $user->pushes++;
+                $user->save();
             }
         }
         return redirect()->route('home');
