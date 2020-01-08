@@ -14,6 +14,18 @@
                 <label for="name">Naam:</label>
                 <input type="text" id="name" name="name" value="{{ old('name', $category->name) }}">
             </div>
+
+            <div class="my-row">
+                <label for="">Klassen:</label>
+                    @foreach($selected_groups as $selected)
+                        @if($selected['selected'] == 1)
+                            <input type="checkbox" name="{{ $selected['id'] }}" id="{{ $selected['id'] }}" checked> {{ $selected['name'] }}
+                        @else
+                            <input type="checkbox" name="{{ $selected['id'] }}" id="{{ $selected['id'] }}"> {{ $selected['name'] }}
+                        @endif
+                    @endforeach
+            </div>
+
             <div class="my-row">
                 <label for="published">Published:</label>
                 <select id="published" name="published">
