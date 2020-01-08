@@ -23,7 +23,8 @@
             </div>
             <div class="my-row">
                 <input type="submit" value="Opslaan">
-                <a href="{{ route('categories.delete', $category->id) }}">delete</a>
+                <p><a href="{{ route('categories.delete', $category->id) }}">delete</a></p>
+                <p><a href="/admin/categories">&lt; back</a></p>
             </div>
         </div>
     </form>

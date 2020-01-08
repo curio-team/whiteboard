@@ -22,6 +22,7 @@
             </div>
             <div class="my-row">
                 <input type="submit" value="Opslaan">
+                <p><a href="/admin/categories">&lt; back</a></p>
             </div>
         </div>
     </form>

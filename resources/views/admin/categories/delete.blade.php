@@ -16,6 +16,7 @@
             </div>
             <div class="my-row">
                 <input type="submit" value="Verwijderen">
+                <a href="/admin/categories">&lt; back</a>
             </div>
         </div>
     </form>

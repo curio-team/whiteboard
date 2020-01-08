@@ -20,7 +20,8 @@
             </div>
             <div class="my-row">
                 <input type="submit" value="Opslaan">
-                <a href="{{ route('announcements.delete', $announcement->id) }}">delete</a>
+                <p><a href="{{ route('announcements.delete', $announcement->id) }}">delete</a></p>
+                <p><a href="/admin/announcements">&lt; back</a></p>
             </div>
         </div>
     </form>
