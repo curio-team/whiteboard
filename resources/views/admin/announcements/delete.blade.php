@@ -20,6 +20,7 @@
             </div>
             <div class="my-row">
                 <input type="submit" value="Verwijderen">
+                <p><a href="/admin/announcements">&lt; back</a></p>
             </div>
         </div>
     </form>

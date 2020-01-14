@@ -2,12 +2,15 @@
  
 namespace App\Http\Controllers; 
  
-use Illuminate\Http\Request; 
+use App\Group;
+use Illuminate\Http\Request;
 use App\Category; 
 use App\User; 
 use Auth; 
 use Gate; 
- 
+use \StudioKaa\Amoclient\Facades\AmoAPI;
+use Illuminate\Support\Facades\DB;
+
 class CategoryController extends Controller 
 { 
     /** 
@@ -15,6 +18,19 @@ class CategoryController extends Controller
      * 
      * @return \Illuminate\Http\Response 
      */ 
+
+    private $pusher;
+
+    public function __construct()
+    {
+        $this->pusher = new \Pusher\Pusher(
+            \Config::get('broadcasting.connections.pusher.key'),
+            \Config::get('broadcasting.connections.pusher.secret'),
+            \Config::get('broadcasting.connections.pusher.app_id'),
+            array('cluster' => 'eu', 'encrypted' => true)
+        );
+    }
+
     public function index() 
     { 
         $categories = Category::all(); 
@@ -41,7 +57,15 @@ class CategoryController extends Controller
      */ 
     public function create() 
     { 
-        return view('admin.categories.create'); 
+        $groups = AmoAPI::get('/groups');
+        foreach($groups as $groupKey => $group){
+            if($group['type'] != 'class')
+            {
+                unset($groups[$groupKey]);
+            }
+        }
+        
+        return view('admin.categories.create')->with('groups',$groups); 
     } 
  
     /** 
@@ -51,17 +75,37 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response 
      */ 
     public function store(Request $request) 
-    { 
+    {
+//        dd($request->all());
+
         $request->validate([ 
             'name' => 'string|required', 
             'published' => 'required|min:0|max:1', 
-        ]); 
- 
+        ]);
+
+        $groups = AmoAPI::get('/groups');
+        $selected_groups = array();
+
+        foreach($groups as $groupKey => $group){
+            if($request->has($group['id'])){
+                array_push($selected_groups, $group['id']);
+            }
+        }
+
         $category = new Category(); 
         $category->name = $request->name; 
         $category->published = $request->published; 
         $category->save(); 
  
+        foreach($selected_groups as $group_id)
+        {
+            $group = new Group();
+            $group->id = $group_id;
+            
+            $result = $group->Categories()->syncWithoutDetaching($category);
+
+        }
+
         return redirect()->route('categories.index'); 
     } 
  
@@ -71,9 +115,41 @@ class CategoryController extends Controller
      * @param  int  $id 
      * @return \Illuminate\Http\Response 
      */ 
-    public function edit(Category $category) 
-    { 
-        return view('admin.categories.edit')->with('category', $category); 
+    public function edit(Category $category)
+    {
+
+        $groups = AmoAPI::get('/groups');
+
+        foreach($groups as $groupKey => $group){
+            if($group['type'] != 'class')
+            {
+                unset($groups[$groupKey]);
+            }
+        }
+
+        $db_groups = DB::table('groups_categories_pivot')->where('category_id', '=', $category->id)->get();
+        $selected_groups = array();
+
+        $count = -1;
+        foreach ($groups as $group){
+            $count++;
+            $selected_group = [ 'id' => $group['id'],'name' => $group['name'], 'selected' => 0 ];
+
+            foreach ($db_groups as $db_group){
+                if($selected_group['id'] == $db_group->group_id){
+                    $selected_group['selected'] = 1;
+                    break;
+                }
+            }
+            array_push($selected_groups, $selected_group);
+        }
+        
+        // dit is the value met alle gegevens $selected_groups
+
+        return view('admin.categories.edit')
+            ->with('category', $category)
+            ->with('groups', $groups)
+            ->with('selected_groups', $selected_groups);
     } 
  
     /** 
@@ -94,6 +170,38 @@ class CategoryController extends Controller
         $category->published = $request->published; 
         $category->save(); 
  
+        
+
+        $groups = AmoAPI::get('/groups');
+        $selected_groups = array();
+
+        foreach($groups as $groupKey => $group){
+            if($request->has($group['id'])){
+                array_push($selected_groups, $group['id']);
+            }
+        }
+
+        //delete all pivot's
+        foreach($groups as $group_id)
+        {
+            $group = new Group();
+            $group->id = $group_id['id'];
+
+            $result = $group->Categories()->detach($category);
+        }
+
+//        dd($request->all());
+
+        //and pivot them again
+         foreach($selected_groups as $group_id)
+         {
+
+             $group = new Group();
+             $group->id = $group_id;
+            
+             $result = $group->Categories()->syncWithoutDetaching($category);
+
+         }
         return redirect()->route('categories.index'); 
     } 
  

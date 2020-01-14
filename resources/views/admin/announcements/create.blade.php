@@ -19,6 +19,7 @@
             </div>
             <div class="my-row">
                 <input type="submit" value="Opslaan">
+                <p><a href="/admin/announcements">&lt; back</a></p>
             </div>
         </div>
     </form>
