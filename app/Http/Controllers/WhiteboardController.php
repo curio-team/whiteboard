@@ -31,7 +31,13 @@ class WhiteboardController extends Controller
     {
         $me = AmoAPI::get('/me');
 
-        if($me['type'] == 'student'){
+        if(Gate::allows('admin'))
+        {
+            $categories = Category::where('published', true)->with(['users' => function ($q) {
+                $q->orderBy('users_categories_pivot.created_at', 'asc');
+            }])->get();
+        }
+        elseif($me['type'] == 'student'){
             $groups = DB::table('groups_categories_pivot')->where('group_id', '=', $me['groups'][0]['id'])->get();
             $cat_ids = array();
 
@@ -44,11 +50,6 @@ class WhiteboardController extends Controller
             }])->get();
         }
 
-        else{
-            $categories = Category::where('published', true)->with(['users' => function ($q) {
-                $q->orderBy('users_categories_pivot.created_at', 'asc');
-            }])->get();
-        }
 
         $announcements = Announcement::orderBy('created_at', 'desc')->get();
 
