@@ -37,11 +37,15 @@ class WhiteboardController extends Controller
             ->with('announcements', $announcements);
     }
 
-    public function signUp(User $user, Category $category)
+    public function signUp(User $user, Category $category, $description)
     {
         if (Gate::allows('edit-own', $user) && $category->published)
         {
-            $result = $user->categories()->syncWithoutDetaching($category);
+            $result = $user->categories()->syncWithoutDetaching([
+                $category->id => [
+                    'description' => $description
+                ]
+            ]);
 
             if($result['attached'])
             {
@@ -53,7 +57,7 @@ class WhiteboardController extends Controller
                         'time' => date('d/m H:i')
                     )
                 ));
-                
+
                 $user->pushes++;
                 $user->save();
             }

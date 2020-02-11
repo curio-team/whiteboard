@@ -14,7 +14,7 @@
 Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('/', 'WhiteboardController@index')->name('home');
-	Route::get('signup/user/{user}/category/{category}', 'WhiteboardController@signUp');
+    Route::get('signup/user/{user}/category/{category}/description/{description}', 'WhiteboardController@signUp');
 	Route::get('signoff/user/{user}/category/{category}', 'WhiteboardController@signOff');
 
 	Route::group(['middleware' => 'admin'], function() {
